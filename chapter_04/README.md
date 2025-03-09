@@ -107,16 +107,7 @@ PRAGMA database_size;
 -- Hive partitioning
 
 -- configure to use only 1 thread
-SET threads TO 1;
-
-COPY (
-    SELECT * 
-    FROM read_parquet('book_reviews.parquet')
-) TO 'book_reviews_hive' (
-    FORMAT parquet, 
-    PARTITION_BY (review_year, region), 
-    OVERWRITE_OR_IGNORE true
-);
+SET threads TO 1;  COPY ( SELECT * FROM read_parquet('book_reviews.parquet') ) TO 'book_reviews_hive' ( FORMAT parquet, PARTITION_BY (review_year, region),  OVERWRITE_OR_IGNORE true );
 
 .timer on
 
